@@ -1,0 +1,20 @@
+.picture {
+  margin: auto;
+  margin-top: 50px;
+}
+
+.modal-picture {
+  height: 100%;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  object-fit: cover;
+}
+
+.delete-button {
+  margin-left: 5px;
+}
+
+.view-modal-body {
+  margin: auto;
+}

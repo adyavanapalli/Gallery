@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "process",
+      "command": "dotnet",
+      "problemMatcher": "$msCompile",
+      "args": ["build"],
+      "echoCommand": true,
+      "detail": ".NET Builder",
+      "group": "build"
+    },
+    {
+      "label": "publish",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "publish",
+        "--configuration=Release",
+        "-p:PublishProfile=Default"
+      ],
+      "problemMatcher": "$msCompile",
+      "echoCommand": true,
+      "detail": "Publisher for the .NET Platform",
+      "group": "build"
+    }
+  ]
+}
