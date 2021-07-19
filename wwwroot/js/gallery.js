@@ -34,8 +34,8 @@ function setUpEditModalShownListener() {
   document
     .getElementById("editModal")
     .addEventListener("shown.bs.modal", function (event) {
-      var button = event.relatedTarget;
-      var id = button.getAttribute("data-bs-edit-id");
+      const button = event.relatedTarget;
+      const id = button.getAttribute("data-bs-edit-id");
 
       document
         .querySelector("[data-bs-save-id]")
@@ -47,32 +47,42 @@ function setUpEditModalShownListener() {
  * Sets up the event listener for the `shown.bs.modal` event on the view modal.
  */
 function setUpViewModalShownListener() {
-  document
-    .getElementById("viewModal")
-    .addEventListener("show.bs.modal", async function (event) {
-      var button = event.relatedTarget;
-      var id = button.getAttribute("data-bs-view-id");
+  const $viewModal = document.getElementById("viewModal");
 
-      var response = await fetch(`/api/v1/images/${id}`);
-      var image = await response.json();
+  $viewModal.addEventListener("shown.bs.modal", async function (event) {
+    const button = event.relatedTarget;
+    const id = button.getAttribute("data-bs-view-id");
 
-      document.querySelector(
-        ".js-view-modal-body"
-      ).innerHTML = `<img class="modal-picture" src="data:image;base64,${image.imagePixelData}" />`;
-    });
+    const response = await fetch(`/api/v1/images/${id}`);
+    const image = await response.json();
+
+    document.querySelector(
+      ".js-view-modal-body"
+    ).innerHTML = `<img class="modal-picture" src="data:image;base64,${image.imagePixelData}" />`;
+  });
+
+  $viewModal.addEventListener("hidden.bs.modal", () => {
+    document.querySelector(".js-view-modal-body").innerHTML = "";
+  });
 }
 
 /**
  * Loads all existing pictures' thumbnails in the gallery's data store.
  */
 async function loadExistingPictureThumbnails() {
-  var response = await fetch("/api/v1/images?thumbnailOnly=true");
-  var images = await response.json();
+  const response = await fetch("/api/v1/images?thumbnailOnly=true");
+  const images = await response.json();
 
-  var $galleryContainer = document.querySelector(".js-gallery-container");
+  document.querySelector(".js-spinner").remove();
+
+  const $galleryContainer = document.querySelector(".js-gallery-container");
 
   for (const image of images) {
-    var cardHtml = getCardHtml(image.id, image.name, image.thumbnailPixelData);
+    const cardHtml = getCardHtml(
+      image.id,
+      image.name,
+      image.thumbnailPixelData
+    );
 
     $galleryContainer.innerHTML += cardHtml;
   }
@@ -85,23 +95,29 @@ async function loadExistingPictureThumbnails() {
  * Uploads the picture specified in the file input.
  */
 async function uploadPicture() {
-  var $fileInput = document.querySelector(".js-file-input");
+  const $fileInput = document.querySelector(".js-file-input");
 
   if ($fileInput.files.length === 1) {
-    var file = $fileInput.files[0];
+    const file = $fileInput.files[0];
 
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append("formFile", file);
 
-    var response = await fetch("/api/v1/images", {
+    const response = await fetch("/api/v1/images", {
       method: "POST",
       body: formData,
     });
-    var image = await response.json();
 
-    var $galleryContainer = document.querySelector(".js-gallery-container");
+    const image = await response.json();
 
-    var cardHtml = getCardHtml(image.id, image.name, image.thumbnailPixelData);
+    const $galleryContainer = document.querySelector(".js-gallery-container");
+
+    const cardHtml = getCardHtml(
+      image.id,
+      image.name,
+      image.thumbnailPixelData
+    );
+
     $galleryContainer.innerHTML += cardHtml;
   }
 
@@ -126,10 +142,10 @@ async function deletePicture(id) {
  * name.
  */
 async function updatePictureName($el) {
-  var id = $el.getAttribute("data-bs-save-id");
-  var name = document.getElementById("edit-name-input").value;
+  const id = $el.getAttribute("data-bs-save-id");
+  const name = document.getElementById("edit-name-input").value;
 
-  var patchModel = {
+  const patchModel = {
     name: name,
   };
 

@@ -75,7 +75,7 @@ namespace Gallery.Services
                                                .Constrain(new Constraint(ConstraintMode.Fit_Crop,
                                                                          _configuration.GetValue<uint>(JsonConfigurationVariable.ThumbnailDefaultWidth),
                                                                          _configuration.GetValue<uint>(JsonConfigurationVariable.ThumbnailDefaultHeight)))
-                                               .EncodeToBytes(new MozJpegEncoder(100))
+                                               .EncodeToBytes(new MozJpegEncoder(_configuration.GetValue<int>(JsonConfigurationVariable.ThumbnailDefaultQuality)))
                                                .Finish()
                                                .InProcessAsync();
 

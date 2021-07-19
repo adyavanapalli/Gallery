@@ -8,11 +8,16 @@ namespace Gallery.Constants
         /// <summary>
         /// The name of the JSON configuration variable representing the default thumbnail height.
         /// </summary>
-        public const string ThumbnailDefaultHeight = "Thumbnail.DefaultHeight";
+        public const string ThumbnailDefaultHeight = "Thumbnail:DefaultHeight";
 
         /// <summary>
         /// The name of the JSON configuration variable representing the default thumbnail width.
         /// </summary>
-        public const string ThumbnailDefaultWidth = "Thumbnail.DefaultWidth";
+        public const string ThumbnailDefaultWidth = "Thumbnail:DefaultWidth";
+
+        /// <summary>
+        /// The name of the JSON configuration variable representing the default thumbnail quality.
+        /// </summary>
+        public const string ThumbnailDefaultQuality = "Thumbnail:DefaultQuality";
     }
 }

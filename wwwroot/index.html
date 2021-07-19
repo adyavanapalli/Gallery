@@ -54,6 +54,11 @@
     </nav>
     <div class="py-5 bg-light">
       <div class="container">
+        <div class="d-flex justify-content-center js-spinner">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
         <div class="row row-cols-auto g-3 js-gallery-container">
           <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -78,10 +83,7 @@
         <div class="modal fade" id="viewModal" tabindex="-1" aria-hidden="true">
           <div class="modal-dialog modal-xl">
             <div class="modal-content">
-              <div class="view-modal-body js-view-modal-body">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <div class="js-view-modal-body">
               </div>
             </div>
           </div>
